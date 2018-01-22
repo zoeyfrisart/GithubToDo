@@ -5,14 +5,13 @@ import Issue from './issue';
 // Import firebase
 import base from '../base';
 
-
 export default class Respos extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       respos: {},
-    }
+    };
   }
 
   componentWillMount() {
