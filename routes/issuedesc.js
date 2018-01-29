@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
+import { PropTypes } from 'prop-types';
 import IssueRow from '../components/issueRow';
 import Header from '../components/header';
 
@@ -50,3 +51,8 @@ export default class IssueDesc extends React.Component {
     );
   }
 }
+
+IssueDesc.propTypes = {
+  match: PropTypes.object.isRequired,
+  issueId: PropTypes.string.isRequired,
+};

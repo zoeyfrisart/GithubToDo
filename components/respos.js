@@ -63,11 +63,9 @@ export default class Respos extends React.Component {
     return (
       <View style={styles.wrapper}>
         <ScrollView>
-          {
-            Object
-              .keys(this.state.respos)
-              .map(key => <Issue key={key} index={key} details={this.state.respos[key]} />)
-          }
+          {Object.keys(this.state.respos).map(key => (
+            <Issue key={key} index={key} details={this.state.respos[key]} />
+          ))}
         </ScrollView>
         <Text>{this.state.data}</Text>
       </View>

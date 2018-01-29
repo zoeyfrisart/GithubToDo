@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 export default class Issue extends React.Component {
   render() {
     return (
-      <Link style={styles.issue} to={`issue/${this.props.index}`} >
+      <Link style={styles.issue} to={`issue/${this.props.index}`}>
         <View style={styles.linkwrap}>
           <Text style={styles.title}>{this.props.details.title}</Text>
           <Text style={styles.milestone}>{this.props.details.milestone}</Text>

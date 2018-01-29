@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, SectionList, Text, View } from 'react-native';
-import { NativeRouter, Route, Link } from 'react-router-native';
+import { StyleSheet, View } from 'react-native';
+import { NativeRouter, Route } from 'react-router-native';
 import HomeScreen from './routes/home.js';
 import IssueDesc from './routes/issuedesc';
 
