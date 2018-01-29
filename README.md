@@ -67,7 +67,7 @@ The App Component accepts the following attributes
 
 Attribute | Type | Usage
 --- | --- | ---
-- | - | -
+| - | - | - |
 
 ## Header Component
 ### Usage
@@ -373,5 +373,5 @@ The Respos Component accepts the following attributes
 
 Attribute | Type | Usage
 --- | --- | ---
-- | - | -
+| - | - | - |
 
