@@ -18,6 +18,9 @@ To start the development server run
 
 Then either open the simulator by pressing I on your keyboard, or scan the QR-code in the expo app on your phone
 
+## Code screenshots
+You can find screenshots of all the code in the [Code screenshots folder.](https://github.com/yannick1691/GithubToDo/tree/master/Code_screenshots/)
+
 ## License information
 Copyright (c) 2018 Yannick Frisart ALL RIGHTS RESERVED
 
