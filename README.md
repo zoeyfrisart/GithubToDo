@@ -198,7 +198,27 @@ The IssueDesc Component is located at
 
 ### Component Code
 ```jsx
-render() {
+export default class IssueDesc extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      issue: {},
+    };
+  }
+
+  componentWillMount(nextProps) {
+    this.ref = base.syncState(`/issues/${this.props.match.params.issueId}`, {
+      context: this,
+      state: 'issue',
+    });
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
+  render() {
     const issue = this.state.issue;
     return (
       <ScrollView style={styles.container}>
@@ -216,6 +236,7 @@ render() {
       </ScrollView>
     );
   }
+}
 ```
 
 ### Attributes
@@ -292,6 +313,44 @@ The Respos Component is located at
 
 ### Component Code
 ```jsx
+export default class Respos extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      respos: {},
+    };
+  }
+
+  componentWillMount() {
+    this.ref = base.syncState(`/issues`, {
+      context: this,
+      state: 'respos',
+    });
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
+  populateData() {
+    const respos = { ...this.state.respos };
+    const item = {
+      title: 'Issue desc 1',
+      tags: {
+        bug: true,
+        toDo: true,
+      },
+      assigned: {
+        p1: 'Yannick Frisart',
+      },
+      milestone: 'V0.3',
+    };
+    const timestamp = Date.now();
+    respos[`issue-${timestamp}`] = item;
+    this.setState({ respos });
+  }
+
   render() {
     return (
       <View style={styles.wrapper}>
@@ -306,6 +365,7 @@ The Respos Component is located at
       </View>
     );
   }
+}
 ```
 
 ### Attributes
