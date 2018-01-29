@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
   label: {
     alignItems: 'center',
@@ -24,17 +25,20 @@ const styles = StyleSheet.create({
   labels: {
     flexDirection: 'row',
   },
+  inputLabel: {
+    fontWeight: '700',
+  },
 });
 
 export default class IssueRow extends React.Component {
   render() {
-    if (this.props.label === 'labels') {
+    if (this.props.label === 'Labels') {
       const value = this.props.value;
       const splitted = value.split(', ');
       console.log(splitted);
       return (
         <View style={styles.issueRow}>
-          <Text>{this.props.label}</Text>
+          <Text style={styles.inputLabel}>{this.props.label}</Text>
           <View style={styles.labels}>
             {Object.keys(splitted).map(key => (
               <Text key={key} style={styles.label}>
@@ -47,7 +51,7 @@ export default class IssueRow extends React.Component {
     }
     return (
       <View style={styles.issueRow}>
-        <Text>{this.props.label}</Text>
+        <Text style={styles.inputLabel}>{this.props.label}</Text>
         <Text>{this.props.value}</Text>
       </View>
     );

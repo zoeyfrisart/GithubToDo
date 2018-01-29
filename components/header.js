@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-native';
 import { PropTypes } from 'prop-types';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+
+import backArrowIcon from '../assets/backarrow.png';
 
 const styles = StyleSheet.create({
   header: {
-    height: 150,
+    alignItems: 'center',
     backgroundColor: '#333333',
+    flexDirection: 'row',
+    height: 150,
     justifyContent: 'center',
   },
   text: {
@@ -15,6 +19,10 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
+  back: {
+    position: 'absolute',
+    left: 10,
+  },
 });
 
 export default class Header extends React.Component {
@@ -22,8 +30,8 @@ export default class Header extends React.Component {
     return (
       <View style={[styles.header, { backgroundColor: this.props.background }]}>
         {this.props.backArrow && (
-          <Link to="/">
-            <Text>back</Text>
+          <Link to="/" style={styles.back}>
+            <Image source={backArrowIcon} />
           </Link>
         )}
         <Text style={styles.text}>{this.props.header}</Text>
@@ -34,9 +42,11 @@ export default class Header extends React.Component {
 
 Header.propTypes = {
   backArrow: PropTypes.bool,
+  background: PropTypes.string,
   header: PropTypes.string.isRequired,
 };
 
 Header.defaultProps = {
   backArrow: false,
+  background: '#3f3f3f',
 };

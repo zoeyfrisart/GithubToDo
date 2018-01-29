@@ -1,21 +1,7 @@
 import React from 'react';
-import { StyleSheet, SectionList, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Header from '../components/header';
 import Respos from '../components/respos';
-
-export default class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Header
-          header="HOME"
-          background="#444eee"
-        />
-        <Respos />
-      </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -32,5 +18,16 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44,
-  }
+  },
 });
+
+export default class HomeScreen extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Header header="HOME" background="#444eee" />
+        <Respos />
+      </View>
+    );
+  }
+}

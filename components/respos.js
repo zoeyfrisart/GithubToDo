@@ -5,6 +5,22 @@ import Issue from './issue';
 // Import firebase
 import base from '../base';
 
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    backgroundColor: '#fafafa',
+  },
+  item: {
+    height: 44,
+    color: '#333',
+    backgroundColor: '#eeeeee',
+    fontFamily: 'PingFang SC',
+    marginTop: 4,
+    fontSize: 18,
+    padding: 10,
+  },
+});
+
 export default class Respos extends React.Component {
   constructor(props) {
     super(props);
@@ -31,12 +47,12 @@ export default class Respos extends React.Component {
       title: 'Issue desc 1',
       tags: {
         bug: true,
-        toDo: true
+        toDo: true,
       },
       assigned: {
-        p1: 'Yannick Frisart'
+        p1: 'Yannick Frisart',
       },
-      milestone: 'V0.3'
+      milestone: 'V0.3',
     };
     const timestamp = Date.now();
     respos[`issue-${timestamp}`] = item;
@@ -55,22 +71,6 @@ export default class Respos extends React.Component {
         </ScrollView>
         <Text>{this.state.data}</Text>
       </View>
-    )
+    );
   }
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    backgroundColor: '#fafafa',
-  },
-  item: {
-    height: 44,
-    color: '#333',
-    backgroundColor: '#eeeeee',
-    fontFamily: 'PingFang SC',
-    marginTop: 4,
-    fontSize: 18,
-    padding: 10,
-  },
-})
