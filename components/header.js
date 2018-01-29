@@ -1,20 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Link } from 'react-router-native';
+import { PropTypes } from 'prop-types';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
-export default class Header extends React.Component {
-  render() {
-    return (
-      <View style={[styles.header, {backgroundColor: this.props.background}]}>
-        <Text style={styles.text}>{this.props.header}</Text>
-      </View>
-    )
-  }
-}
+import backArrowIcon from '../assets/backarrow.png';
 
 const styles = StyleSheet.create({
   header: {
-    height: 150,
+    alignItems: 'center',
     backgroundColor: '#333333',
+    flexDirection: 'row',
+    height: 150,
     justifyContent: 'center',
   },
   text: {
@@ -23,4 +19,34 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
+  back: {
+    position: 'absolute',
+    left: 10,
+  },
 });
+
+export default class Header extends React.Component {
+  render() {
+    return (
+      <View style={[styles.header, { backgroundColor: this.props.background }]}>
+        {this.props.backArrow && (
+          <Link to="/" style={styles.back}>
+            <Image source={backArrowIcon} />
+          </Link>
+        )}
+        <Text style={styles.text}>{this.props.header}</Text>
+      </View>
+    );
+  }
+}
+
+Header.propTypes = {
+  backArrow: PropTypes.bool,
+  background: PropTypes.string,
+  header: PropTypes.string.isRequired,
+};
+
+Header.defaultProps = {
+  backArrow: false,
+  background: '#3f3f3f',
+};

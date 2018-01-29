@@ -1,19 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Link } from 'react-router-native';
-
-export default class Issue extends React.Component {
-  render() {
-    return (
-      <Link style={styles.issue} to={`issue/${this.props.index}`} >
-        <View style={styles.linkwrap}>
-          <Text style={styles.title}>{this.props.details.title}</Text>
-          <Text style={styles.milestone}>{this.props.details.milestone}</Text>
-        </View>
-      </Link>
-    )
-  }
-}
+import { PropTypes } from 'prop-types';
 
 const styles = StyleSheet.create({
   issue: {
@@ -38,10 +26,28 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    color: '#333333'
+    color: '#333333',
   },
   milestone: {
     color: '#34495e',
-    fontSize: 14
+    fontSize: 14,
   },
-})
+});
+
+export default class Issue extends React.Component {
+  render() {
+    return (
+      <Link style={styles.issue} to={`issue/${this.props.index}`} >
+        <View style={styles.linkwrap}>
+          <Text style={styles.title}>{this.props.details.title}</Text>
+          <Text style={styles.milestone}>{this.props.details.milestone}</Text>
+        </View>
+      </Link>
+    );
+  }
+}
+
+Issue.propTypes = {
+  index: PropTypes.string.isRequired,
+  details: PropTypes.object.isRequired,
+};

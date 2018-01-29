@@ -29,6 +29,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 * [Home Component](#home-component)
 * [Issue Component](#issue-component)
 * [IssueDesc Component](#issuedesc-component)
+* [IssueRow Component](#issuerow-component)
 * [Respos Component](#respos-component)
 
 ## App Component
@@ -45,8 +46,270 @@ The App Component is located at
   ./App.js
 ```
 
+### Component Code
+```jsx
+export default class App extends React.Component {
+  render() {
+    return (
+      <NativeRouter>
+        <View style={styles.container}>
+          <Route exact path="/" render={() => <HomeScreen />} />
+          <Route path="/issue/:issueId" render={({ match }) => <IssueDesc match={match} />} />
+        </View>
+      </NativeRouter>
+    );
+  }
+}
+```
+
 ### Attributes
 The App Component accepts the following attributes
+
+Attribute | Type | Usage
+--- | --- | ---
+- | - | -
+
+## Header Component
+### Usage
+The Header component consists of the following
+* Back arrow
+* Page title
+
+### Location
+The Header Component is located at
+```
+  ./components/header.js
+```
+
+### Component Code
+```jsx
+export default class Header extends React.Component {
+  render() {
+    return (
+      <View style={[styles.header, { backgroundColor: this.props.background }]}>
+        {this.props.backArrow && (
+          <Link to="/" style={styles.back}>
+            <Image source={backArrowIcon} />
+          </Link>
+        )}
+        <Text style={styles.text}>{this.props.header}</Text>
+      </View>
+    );
+  }
+}
+```
+
+### Attributes
+The Header Component accepts the following attributes
+
+Attribute | Type | Usage
+--- | --- | ---
+backArrow | bool | Should there be a back arrow in the header.
+background | string | What should the background color of the header be.
+header | string | What is the title that should be in the header.
+
+## Home Component
+### Usage
+The Home component consists of the following
+* Header
+* List of issue's
+
+### Location
+The Home Component is located at
+```
+  ./routes/home.js
+```
+
+### Component Code
+```jsx
+export default class HomeScreen extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Header header="HOME" background="#444eee" />
+        <Respos />
+      </View>
+    );
+  }
+}
+```
+
+### Attributes
+The Home Component accepts the following attributes
+
+Attribute | Type | Usage
+--- | --- | ---
+- | - | -
+
+## Issue Component
+### Usage
+The Issue component consists of the following
+* Link to [IssueDesc Component](#issuedesc-component)
+  * Issue Title
+  * Issue Milestone
+
+### Location
+The Issue Component is located at
+```
+  ./components/issue.js
+```
+
+### Component Code
+```jsx
+export default class Issue extends React.Component {
+  render() {
+    return (
+      <Link style={styles.issue} to={`issue/${this.props.index}`} >
+        <View style={styles.linkwrap}>
+          <Text style={styles.title}>{this.props.details.title}</Text>
+          <Text style={styles.milestone}>{this.props.details.milestone}</Text>
+        </View>
+      </Link>
+    );
+  }
+}
+```
+
+### Attributes
+The Issue Component accepts the following attributes
+
+Attribute | Type | Usage
+--- | --- | ---
+index | string | What is the issueId of the issue.
+details | object | The object that contains all the issue data.
+
+## IssueDesc Component
+### Usage
+The IssueDesc component consists of the following
+* Header
+* List of Issue details
+  * Title
+  * Description
+  * Status
+  * Assigned
+  * Labels
+  * Milestone
+
+### Location
+The IssueDesc Component is located at
+```
+  ./routes/issuedesc.js
+```
+
+### Component Code
+```jsx
+render() {
+    const issue = this.state.issue;
+    return (
+      <ScrollView style={styles.container}>
+        <Header header="ISSUE" background="#5eeeee" backArrow />
+        {issue.title && <IssueRow key="Title" label="Title" value={this.state.issue.title} />}
+        {issue.body && <IssueRow key="Body" label="Description" value={this.state.issue.body} />}
+        {issue.status && <IssueRow key="Status" label="Status" value={this.state.issue.status} />}
+        {issue.assigned && (
+          <IssueRow key="Assigned" label="Assigned" value={this.state.issue.assigned} />
+        )}
+        {issue.labels && <IssueRow key="Labels" label="Labels" value={this.state.issue.labels} />}
+        {issue.milestone && (
+          <IssueRow key="Milestone" label="Milestone" value={this.state.issue.milestone} />
+        )}
+      </ScrollView>
+    );
+  }
+```
+
+### Attributes
+The IssueDesc Component accepts the following attributes
+
+Attribute | Type | Usage
+--- | --- | ---
+issueId | string | The identifier of the issue, used to get the issue details from the database.
+
+## IssueRow Component
+### Usage
+The IssueRow component consists of the following
+* Row
+  * Label
+  * Value of data
+
+### Location
+The Issuerow Component is located at
+```
+  ./components/issueRow.js
+```
+
+### Component Code
+```jsx
+export default class IssueRow extends React.Component {
+  render() {
+    if (this.props.label === 'Labels') {
+      const value = this.props.value;
+      const splitted = value.split(', ');
+      console.log(splitted);
+      return (
+        <View style={styles.issueRow}>
+          <Text style={styles.inputLabel}>{this.props.label}</Text>
+          <View style={styles.labels}>
+            {Object.keys(splitted).map(key => (
+              <Text key={key} style={styles.label}>
+                {splitted[key]}
+              </Text>
+            ))}
+          </View>
+        </View>
+      );
+    }
+    return (
+      <View style={styles.issueRow}>
+        <Text style={styles.inputLabel}>{this.props.label}</Text>
+        <Text>{this.props.value}</Text>
+      </View>
+    );
+  }
+}
+```
+
+### Attributes
+The IssueRow Component accepts the following attributes
+
+Attribute | Type | Usage
+--- | --- | ---
+label | string | The text that should be the title of the issue row.
+value | string | What is the value of the label.
+
+## Respos Component
+### Usage
+The Respos component consists of the following
+* Scrollable view
+  * List of Issue's
+    * Links to [IssueDesc Component](#issuedesc-component)
+
+### Location
+The Respos Component is located at
+```
+  ./components/respos.js
+```
+
+### Component Code
+```jsx
+  render() {
+    return (
+      <View style={styles.wrapper}>
+        <ScrollView>
+          {
+            Object
+              .keys(this.state.respos)
+              .map(key => <Issue key={key} index={key} details={this.state.respos[key]} />)
+          }
+        </ScrollView>
+        <Text>{this.state.data}</Text>
+      </View>
+    );
+  }
+```
+
+### Attributes
+The Respos Component accepts the following attributes
 
 Attribute | Type | Usage
 --- | --- | ---
