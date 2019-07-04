@@ -26,7 +26,8 @@
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "npm run snyk-protect",
+    "prepublish": "npm run snyk-protect"
   },
   "jest": {
     "preset": "jest-expo"
@@ -36,11 +37,11 @@
     "prop-types": "^15.6.0",
     "re-base": "^3.2.1",
     "react": "16.0.0-beta.5",
-    "react-native": "^0.56.0",
+    "react-native": "^0.60.0",
     "react-native-swipeable": "^0.6.0",
     "react-navigation": "^1.0.0-beta.21",
     "react-router-native": "^4.2.0",
-    "snyk": "^1.88.2"
+    "snyk": "^1.189.0"
   },
   "snyk": true
 }
