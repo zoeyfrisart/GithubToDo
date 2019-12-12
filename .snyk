@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.5
+version: v1.14.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -17,3 +17,6 @@ patch:
         patched: '2019-10-10T03:22:55.497Z'
     - react-native-scripts > xdl > auth0 > rest-facade > superagent-proxy > proxy-agent > pac-proxy-agent > https-proxy-agent:
         patched: '2019-10-10T03:22:55.497Z'
+  SNYK-JS-TREEKILL-536781:
+    - react-native-scripts > xdl > tree-kill:
+        patched: '2019-12-12T03:23:17.737Z'
